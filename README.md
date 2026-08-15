@@ -1,218 +1,24 @@
-# GeoValora AI
+# Selected GeoValora AI Source Code
 
-### Explainable and uncertainty-aware real estate valuation in Spain
+This folder contains a small, sanitized subset of the application architecture
+published for portfolio review.
 
-GeoValora AI is an end-to-end Machine Learning project for residential property valuation in **Madrid, Barcelona and Valencia**.
+## Files
 
-The project goes beyond producing a single price estimate by combining predictive modeling with **uncertainty quantification, SHAP explainability, territorial context and an interactive Streamlit application**.
+- `runtime_state.py` — defensive parsing, interval validation and shared-state orchestration.
+- `temporal_context.py` — externally supplied temporal contextualization with safeguards against double application.
+- `location_resolution.py` — hierarchical city/district/neighborhood resolution from a supplied catalog.
 
----
+## Public portfolio boundary
 
-## Project Highlights
+These modules intentionally do **not** include:
 
-- End-to-end Data Science workflow
-- Real-world residential property data
-- Data cleaning and feature engineering
-- Leakage prevention
-- XGBoost regression
-- Robust model validation
-- SHAP model explainability
-- Calibrated prediction intervals
-- Territorial analysis
-- Streamlit application
-- Buyer and investor analytical tools
-- Automated reporting
+- the original or processed housing datasets;
+- serialized XGBoost or SHAP artifacts;
+- private territorial catalogs;
+- row-level TEST predictions;
+- Google Drive paths;
+- internal release or backup files.
 
----
-
-## Problem
-
-Real estate price prediction is not only about estimating a number.
-
-A useful analytical system should also answer:
-
-- How reliable is the prediction?
-- Which variables influenced the estimate?
-- Is the property similar to observations seen during training?
-- How does the estimate compare across geographical contexts?
-- What are the limitations of the model?
-
-GeoValora AI was designed around these questions.
-
----
-
-## Machine Learning Approach
-
-The project follows a structured experimental workflow:
-
-1. Data quality assessment
-2. Data cleaning
-3. Exploratory Data Analysis
-4. Feature engineering
-5. Leakage prevention
-6. Experimental design
-7. Baseline modeling
-8. Hyperparameter selection
-9. Robust validation
-10. Final evaluation
-11. SHAP explainability
-12. Uncertainty analysis and application packaging
-
-The final model is based on **XGBoost** using a frozen feature contract of **52 predictors**.
-
----
-
-## Final Model Performance
-
-Final evaluation on the held-out TEST partition:
-
-| Metric | Result |
-|---|---:|
-| R² (log target) | 0.9377 |
-| MAE (log target) | 0.1348 |
-| RMSE (log target) | 0.1843 |
-| MAE | €47,936 |
-| RMSE | €97,772 |
-| Median Absolute Percentage Error | 10.26% |
-
-The TEST partition was reserved for final evaluation and was not reused for subsequent model-selection decisions.
-
----
-### Actual vs. Predicted Prices
-
-The figure below compares observed and predicted residential listing prices on the held-out TEST partition.
-
-Both axes represent prices in euros using a logarithmic scale, which makes it easier to visualize model performance across a wide range of property values.
-
-The concentration of observations around the diagonal indicates strong agreement between actual and predicted prices, while larger deviations become more visible at the extremes of the distribution.
-
-![Actual vs predicted prices](images/model_actual_vs_predicted_logscale.png)
-
-## Uncertainty
-
-GeoValora AI complements point predictions with calibrated prediction intervals.
-
-The final uncertainty framework achieved approximately:
-
-- **90% target coverage**
-- **90.17% observed TEST coverage**
-
-This allows the system to communicate uncertainty instead of presenting a prediction as false precision.
-
-### Prediction Intervals
-
-GeoValora AI complements point estimates with calibrated prediction intervals.
-
-The figure below shows a sample of observations from the held-out TEST partition, ordered by predicted price. Blue points represent model predictions, orange points represent observed listing prices, and the vertical ranges show the associated uncertainty intervals.
-
-Prices are displayed on a logarithmic scale to make the wide range of property values easier to visualize.
-
-The final uncertainty framework was calibrated to a nominal coverage of 90% and achieved **90.17% empirical coverage on TEST**.
-
-![Prediction intervals](images/prediction_intervals.png)
-
----
-
-## Explainability
-
-Local predictions are explained using **SHAP**.
-
-SHAP values help identify which features contribute positively or negatively to an individual prediction.
-
-They describe model behavior and **should not be interpreted as causal effects**.
-
----
-### Global SHAP Analysis
-
-The SHAP summary plot below shows both the magnitude and direction of feature contributions across a balanced sample of properties.
-
-The model relies strongly on geographical and structural characteristics, particularly approximate latitude, constructed area and distance-related variables.
-
-![GeoValora AI SHAP summary](images/shap_summary.png)
-
-
-## GeoValora AI Application
-
-The final project includes a Streamlit application with:
-
-- Property valuation
-- Prediction intervals
-- Analytical confidence
-- Local SHAP explanations
-- City / district / neighborhood context
-- Scenario comparison
-- Buyer analysis
-- Investor analysis
-- JSON, HTML and PDF reports
-
-The production application consumes frozen model artifacts and does not retrain the model during inference.
-
----
-## Example Output
-
-Below is an example of a GeoValora AI valuation report showing the historical estimate, prediction interval, analytical confidence, 2026 contextualization and local SHAP explanation.
-
-![GeoValora AI valuation report](images/geovalora_report_page1.png)
-
-
-## Technology Stack
-
-- Python
-- pandas
-- NumPy
-- scikit-learn
-- XGBoost
-- SHAP
-- Matplotlib
-- PyArrow
-- joblib
-- Streamlit
-- Jupyter / Google Colab
-- Git / GitHub
-
----
-
-## Portfolio Repository Structure
-
-```text
-geovalora-ai-portfolio/
-├── images/       Selected visual results
-├── notebooks/    Selected portfolio notebooks
-├── results/      Aggregated model results
-├── src/          Selected reusable Python code
-└── README.md
-```
-
-This repository is a **public portfolio version** of the project.
-
-The complete academic repository, datasets and restricted artifacts are not redistributed here.
-
----
-
-## Data Policy
-
-The underlying project uses historical residential property listing data.
-
-Complete original, cleaned and modeled datasets are **not included in this public repository**.
-
-Only selected code, aggregated results and visualizations are published.
-
----
-
-## Important Limitations
-
-- The predictive model is based on historical 2018 listing-price data.
-- Predictions represent estimated listing prices rather than guaranteed transaction prices.
-- Territorial information may be approximate.
-- SHAP explanations are not causal.
-- Prediction intervals communicate model uncertainty but are not official appraisal intervals.
-- GeoValora AI is an analytical prototype and not an official property appraisal service.
-
----
-
-## Author
-
-**Anastasia García Reziapova**
-
-Master's Final Project  
-Data Science, Big Data & Business Analytics
+External data and application assets are injected into the public examples rather
+than bundled with the portfolio.
