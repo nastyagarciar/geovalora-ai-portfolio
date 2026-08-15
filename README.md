@@ -18,6 +18,7 @@ The project goes beyond producing a single price estimate by combining predictiv
 - Territorial and temporal contextualization separated from the frozen predictive model
 - Interactive Streamlit application with buyer, investor and scenario-analysis tools
 - Automated valuation reports with predictions, uncertainty and local explanations
+
 ---
 
 ## Problem
@@ -40,18 +41,12 @@ GeoValora AI was designed around these questions.
 
 The project follows a structured experimental workflow:
 
-1. Data quality assessment
-2. Data cleaning
-3. Exploratory Data Analysis
-4. Feature engineering
-5. Leakage prevention
-6. Experimental design
-7. Baseline modeling
-8. Hyperparameter selection
-9. Robust validation
-10. Final evaluation
-11. SHAP explainability
-12. Uncertainty analysis and application packaging
+1. Data quality assessment, cleaning and exploratory analysis
+2. Feature engineering and leakage prevention
+3. Experimental design and baseline modeling
+4. Hyperparameter selection and robust validation
+5. Final evaluation, error analysis and SHAP explainability
+6. Uncertainty calibration and application packaging
 
 The final model is based on **XGBoost** using a frozen feature contract of **52 predictors**.
 
@@ -72,7 +67,6 @@ Final evaluation on the held-out TEST partition:
 
 The TEST partition was reserved for final evaluation and was not reused for subsequent model-selection decisions.
 
----
 ### Actual vs. Predicted Prices
 
 The figure below compares observed and predicted residential listing prices on the held-out TEST partition.
@@ -83,26 +77,19 @@ The concentration of observations around the diagonal indicates strong agreement
 
 ![Actual vs predicted prices](images/model_actual_vs_predicted_logscale.png)
 
+---
+
 ## Uncertainty
 
-GeoValora AI complements point predictions with calibrated prediction intervals.
+GeoValora AI complements point predictions with calibrated prediction intervals rather than presenting a single estimate with false precision.
 
-The final uncertainty framework achieved approximately:
-
-- **90% target coverage**
-- **90.17% observed TEST coverage**
-
-This allows the system to communicate uncertainty instead of presenting a prediction as false precision.
+The final framework was calibrated to a nominal coverage of **90%** and achieved **90.17% empirical coverage on the held-out TEST partition**.
 
 ### Prediction Intervals
 
-GeoValora AI complements point estimates with calibrated prediction intervals.
-
-The figure below shows a sample of observations from the held-out TEST partition, ordered by predicted price. Blue points represent model predictions, orange points represent observed listing prices, and the vertical ranges show the associated uncertainty intervals.
+The figure below shows a sample of TEST observations ordered by predicted price. Blue points represent model predictions, orange points represent observed listing prices, and vertical ranges represent the associated uncertainty intervals.
 
 Prices are displayed on a logarithmic scale to make the wide range of property values easier to visualize.
-
-The final uncertainty framework was calibrated to a nominal coverage of 90% and achieved **90.17% empirical coverage on TEST**.
 
 ![Prediction intervals](images/prediction_intervals.png)
 
@@ -110,21 +97,19 @@ The final uncertainty framework was calibrated to a nominal coverage of 90% and 
 
 ## Explainability
 
-Local predictions are explained using **SHAP**.
+GeoValora AI uses **SHAP** to explain both global model behavior and individual predictions.
 
-SHAP values help identify which features contribute positively or negatively to an individual prediction.
+SHAP values identify which features contribute positively or negatively to model output, but they **should not be interpreted as causal effects**.
 
-They describe model behavior and **should not be interpreted as causal effects**.
-
----
 ### Global SHAP Analysis
 
-The SHAP summary plot below shows both the magnitude and direction of feature contributions across a balanced sample of properties.
+The summary plot shows both the magnitude and direction of feature contributions across a balanced sample of properties.
 
 The model relies strongly on geographical and structural characteristics, particularly approximate latitude, constructed area and distance-related variables.
 
 ![GeoValora AI SHAP summary](images/shap_summary.png)
 
+---
 
 ## GeoValora AI Application
 
@@ -140,15 +125,17 @@ The final project includes a Streamlit application with:
 - Investor analysis
 - JSON, HTML and PDF reports
 
-The production application consumes frozen model artifacts and does not retrain the model during inference.
+The application runtime consumes frozen model artifacts and does not retrain the model during inference.
 
 ---
+
 ## Example Output
 
 Below is an example of a GeoValora AI valuation report showing the historical estimate, prediction interval, analytical confidence, 2026 contextualization and local SHAP explanation.
 
 ![GeoValora AI valuation report](images/geovalora_report_page1.png)
 
+---
 
 ## Technology Stack
 
@@ -176,7 +163,6 @@ geovalora-ai-portfolio/
 ├── results/      Aggregated model results
 ├── src/          Selected reusable Python code
 └── README.md
-```
 
 This repository is a **public portfolio version** of the project.
 
