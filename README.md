@@ -78,6 +78,15 @@ Final evaluation on the held-out TEST partition:
 The TEST partition was reserved for final evaluation and was not reused for subsequent model-selection decisions.
 
 ---
+### Actual vs. Predicted Prices
+
+The figure below compares observed and predicted residential listing prices on the held-out TEST partition.
+
+Both axes represent prices in euros using a logarithmic scale, which makes it easier to visualize model performance across a wide range of property values.
+
+The concentration of observations around the diagonal indicates strong agreement between actual and predicted prices, while larger deviations become more visible at the extremes of the distribution.
+
+![Actual vs predicted prices](images/model_actual_vs_predicted_logscale.png)
 
 ## Uncertainty
 
