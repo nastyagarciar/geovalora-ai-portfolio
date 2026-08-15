@@ -10,19 +10,14 @@ The project goes beyond producing a single price estimate by combining predictiv
 
 ## Project Highlights
 
-- End-to-end Data Science workflow
-- Real-world residential property data
-- Data cleaning and feature engineering
-- Leakage prevention
-- XGBoost regression
-- Robust model validation
-- SHAP model explainability
-- Calibrated prediction intervals
-- Territorial analysis
-- Streamlit application
-- Buyer and investor analytical tools
-- Automated reporting
-
+- End-to-end Machine Learning workflow using real-world residential property data from Madrid, Barcelona and Valencia
+- XGBoost regression model with **R² = 0.9377** on the held-out TEST partition
+- **10.26% median absolute percentage error (MedAPE)** on TEST
+- SHAP explainability with stability analysis across cities
+- Calibrated prediction intervals achieving **90.17% empirical TEST coverage**
+- Territorial and temporal contextualization separated from the frozen predictive model
+- Interactive Streamlit application with buyer, investor and scenario-analysis tools
+- Automated valuation reports with predictions, uncertainty and local explanations
 ---
 
 ## Problem
