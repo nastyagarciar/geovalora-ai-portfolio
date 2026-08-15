@@ -101,6 +101,14 @@ SHAP values help identify which features contribute positively or negatively to 
 They describe model behavior and **should not be interpreted as causal effects**.
 
 ---
+### Global SHAP Analysis
+
+The SHAP summary plot below shows both the magnitude and direction of feature contributions across a balanced sample of properties.
+
+The model relies strongly on geographical and structural characteristics, particularly approximate latitude, constructed area and distance-related variables.
+
+![GeoValora AI SHAP summary](images/shap_summary.png)
+
 
 ## GeoValora AI Application
 
