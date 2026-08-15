@@ -99,6 +99,18 @@ The final uncertainty framework achieved approximately:
 
 This allows the system to communicate uncertainty instead of presenting a prediction as false precision.
 
+### Prediction Intervals
+
+GeoValora AI complements point estimates with calibrated prediction intervals.
+
+The figure below shows a sample of observations from the held-out TEST partition, ordered by predicted price. Blue points represent model predictions, orange points represent observed listing prices, and the vertical ranges show the associated uncertainty intervals.
+
+Prices are displayed on a logarithmic scale to make the wide range of property values easier to visualize.
+
+The final uncertainty framework was calibrated to a nominal coverage of 90% and achieved **90.17% empirical coverage on TEST**.
+
+![Prediction intervals](images/prediction_intervals.png)
+
 ---
 
 ## Explainability
