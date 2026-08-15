@@ -119,6 +119,12 @@ The final project includes a Streamlit application with:
 The production application consumes frozen model artifacts and does not retrain the model during inference.
 
 ---
+## Example Output
+
+Below is an example of a GeoValora AI valuation report showing the historical estimate, prediction interval, analytical confidence, 2026 contextualization and local SHAP explanation.
+
+![GeoValora AI valuation report](images/geovalora_report_page1.png)
+
 
 ## Technology Stack
 
